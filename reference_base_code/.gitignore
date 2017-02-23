@@ -1,0 +1,21 @@
+# Package Files #
+*.jar
+*.war
+*.ear
+*.svn
+*.pyc
+
+
+.settings
+.project
+.classpath
+.externalToolBuilders
+audit.log
+logging.log
+maven-eclipse.xml
+target
+logging.*
+.idea/
+*/**/Gemfile.lock
+*/**/reports/*
+/bin/
