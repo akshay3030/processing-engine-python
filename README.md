@@ -82,6 +82,8 @@ docker-machine ssh <machine-name>
 
 eval $(docker-machine evn <machine>) (generate new ips)
 
+docker service create --replicas 5 -p 9091:5000 --name flask akshay3030/python-processing-engine:dataframe  (create 5 copies of this container)
+
 docker service ls
 
 #ECS service is running ecs task in cluster mode
