@@ -1,0 +1,14 @@
+version: '2'
+services:
+  web:
+    build: .
+    image: "akshay3030/python-processing-engine:dataframe"
+    ports: 
+    - "9091:5000"
+    container_name: "flask-python-engine-dataframe"
+  lambda:
+    build: .
+    image: "akshay3030/invoke-lambda:latest"
+    ports: 
+    - "9092:9090"
+    container_name: "invoke-aws-lambda-ioc-docker"

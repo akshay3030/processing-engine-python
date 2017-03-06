@@ -1,5 +1,7 @@
 import sys
 import importlib
+import json
+from bson import json_util
 
 
 from flask import Flask, request, jsonify
@@ -19,14 +21,14 @@ def load_from_module(full_class_string):
     module = importlib.import_module(module_path)
     return getattr(module, class_str)
 
-@app.route("/hello/<name>")
+@app.route("/hello/<name>") 
 def hello(name):
     return 'Hello from:%s' % name
 
 #@app.route("/calculate/<model_name>", methods=['GET', 'POST'])
 @app.route('/calculate', methods=['GET', 'POST'])
 def calculate():
-    content = request.json
+    #content = request.json
     model_name = request.args.get('model_name')
     
     # load_from_module function can load a Class as well as a function form a .py file, give the full path till class or method level
@@ -36,7 +38,8 @@ def calculate():
     
     #Loading the function with name 'calculate' from <model_name.py> file at run time
     calculator  = load_from_module('model.'+model_name+'.calculate')
-    return 'Calculated value:%s \n' % calculator(content['x'],content['y'])
+    #return 'Calculated value:%s \n' % calculator(content['x'],content['y'])
+    return calculator(json.dumps(request.json,default=json_util.default))   
 
 if __name__ == "__main__":
     #app.run(debug = True)

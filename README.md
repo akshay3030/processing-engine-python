@@ -41,6 +41,7 @@ curl -H "Content-Type: application/json" -X POST -d '{"x":10,"y":30}' http://loc
 
 #Docker Instructions
 docker build -t akshay3030/python-processing-engine .
+docker build -t akshay3030/python-processing-engine:dataframe .
 
 Run in normal-mode : docker run -p 9091:5000 akshay3030/python-processing-engine
 
@@ -53,6 +54,34 @@ docker exec -it {docker-ps-id} /bin/bash
 
 docker exec -it {docker-ps-id} ls
 
+#Docker Compose (Note: Use Docker Swarm & docker-machine to setup the cluster mode ,run Compose on a Swarm cluster)
+
+docker-compose up
+
+docker-compose down
 
 # ELB with Docker on ECS
 https://aws.amazon.com/blogs/compute/microservice-delivery-with-amazon-ecs-and-application-load-balancers/
+
+# Input Json for latest run
+
+url: http://localhost:5000/calculate?model_name=valuation
+{"input1":2,"input2":3,"input3":4,"input4":5}	
+
+#Docker Swarm Example
+
+https://rominirani.com/docker-swarm-tutorial-b67470cf8872
+
+docker-machine create --driver virtualbox <machine-name>
+
+docker swarm init --advertise-addr 192.168.99.100 (start swarm manager)
+
+docker swarm join --tokens <ssh-keys> <ip>:<2377> (from workernode to join master)
+
+docker-machine ssh <machine-name>
+
+eval $(docker-machine evn <machine>) (generate new ips)
+
+docker service ls
+
+#ECS service is running ecs task in cluster mode
