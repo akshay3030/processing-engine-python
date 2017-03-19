@@ -8,6 +8,8 @@ https://www.python.org/downloads/release/python-2711/
 
 Add python directory to the PATH.
 
+#Check pip package versions
+pip freeze | grep Flask
 
 #2. Install pip:
 
